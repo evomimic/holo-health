@@ -11,7 +11,7 @@ This document presents a high-level view of an _Application Architecture_ that s
 
 
 ## Guiding Principles
-<TODO>
+_TODO_
 
 # High-Level Application Architecture
  The following figure depicts a high-level view of the _Empowered Health Market Application Architecture_. 

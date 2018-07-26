@@ -49,7 +49,7 @@ In this example, new instance of the _phv_ app has been created, via
 
 The clone operation copies the DNA file from the original _phv_ app (so it shares the same code as the _phv_ app), but gives it a different UUID (so it will have its own DHT). 
 
-NOTE: Currently, once cloned, any linkage to the original app is lost. So if new versions of the _phv_ app's DNA are accepted, the cloned app will have to be manually updated. I have filed [Issue #154 DNA as 1st Class Object?](https://github.com/holochain/holochain-rust/issues/154) on the holochain-rust project to enable cloned projects to be notified when new versions of the original app have been accepted, with the option to `pull` the new version into the cloned app.
+NOTE: Currently, once cloned, any linkage to the original app is lost. So if new versions of the _phv_ app's DNA are published, the cloned app will have to be manually updated. I have filed [Issue #154 DNA as 1st Class Object?](https://github.com/holochain/holochain-rust/issues/154) on the holochain-rust project to enable cloned projects to be notified when new versions of the original app have been accepted, with the option to `pull` the new version into the cloned app.
 
 In the example, four _nodes_ have joined steves-phv-app.
 

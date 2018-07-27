@@ -39,6 +39,7 @@ To provide more robust searching options (when the list of _HealthObservation_ g
 
 ## Proof of Concept (PoC) Deployment Architecture Example
 
+The better I understand holochain's notion of _agent-centricity_, it seems _node-centric_ may be a more accurate label. A key principle of holochain is **_all state is local state_** and _nodes_ are the holders of local state. Each of my devices is a different _node_. According to my definition of agent, "any entity with the capacity to sense and respond to its environment", holochain _nodes_ do, indeed, qualify as _agents_. But they are distinct from _human agents_. In essence the "vault" pattern is a way of creating a _human-agent_ abstraction on top of a set of _node-agents_.
 
 To understand a possible deployment model for the _PoC Personal Health Vault hApp_, let's start with the anatomy of a single node in a holochain app.  
 
@@ -63,7 +64,6 @@ The clone operation copies the DNA file from the original _phv_ app (so it share
 
 NOTE: Currently, once cloned, any linkage to the original app is lost. So if new versions of the _phv_ app's DNA are published, the cloned app will have to be manually updated. I have filed [Issue #154 DNA as 1st Class Object?](https://github.com/holochain/holochain-rust/issues/154) on the holochain-rust project to enable cloned projects to be notified when new versions of the original app have been accepted, with the option to `pull` the new version into the cloned app.
 
-The better I understand holochain's notion of _agent-centricity_, it seems _node-centric_ may be a more accurate label. A key principle of holochain is **_all state is local state_** and _nodes_ are the holders of local state. Each of my devices is a different _node_. According to my definition of agent, "any entity with the capacity to sense and respond to its environment", holochain _nodes_ do, indeed, qualify as _agents_. But they are distinct from _human agents_. In essence the "vault" pattern is a way of creating a _human-agent_ abstraction on top of a set of _node-agents_.
 
 In the example, four _nodes_ have joined steves-phv-app.
 

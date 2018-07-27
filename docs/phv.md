@@ -75,6 +75,11 @@ In the example, four _nodes_ have joined _steves-phv-hApp_: _Steve's Phone_, _St
 
 **_TODO: insert discussion of membrane functions and restrictions on what nodes can join an app_**. Where should such restrictions be specified? Decisions on whether to allow another hApp to _**bridge**_ this app can be encoded in the _bridgeGenesis callback functions_ of zomes. If any zome's _bridgeGenesis_ function returns `false` the bridge is not allowed to be established. I'm assuming decisions on whether to allow a _node_ to _**join**_ an hApp could similarly be encoded in the _genesis callback function_ of zomes. Is this a sound assumption??? see [Issue #1](https://github.com/evomimic/holo-health/issues/1)** 
 
+# Future Enhancements
+As noted above, the initial PoC implementation will include a very simplistic concept of _HealthObservation_. Going forward, the intent is to support the full [FHIR Observation Resource](https://www.hl7.org/fhir/observation.html):
 
+![FHIR Observation Resouce UML](https://github.com/evomimic/holo-health/blob/master/images/fhir-observation-resource.png)
 
+_Figure 4. UML Representation of the FHIR Observation Resource_
 
+Also, the concept of a HealthCard will be implemented so that different types of FHIR resources beyond _Observations_ (e.g., [DiagnosticReports](https://www.hl7.org/fhir/diagnosticreport.html), [Medications](https://www.hl7.org/fhir/medication.html), [Immunizations](https://www.hl7.org/fhir/immunization.html), etc.)

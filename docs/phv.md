@@ -38,6 +38,15 @@ The _Health Observation_ zome provides only two functions:
 To provide more robust searching options (when the list of _HealthObservation_ gets unwieldy), the [anchors mixin](https://github.com/holochain/mixins/tree/master/anchors) can be added to the _HealthObservation_ zome.
 
 ## Proof of Concept (PoC) Deployment Architecture Example
+The better I understand holochain's notion of _agent-centric_, it seems _node-centric_ may be a more accurate label. A key principle of holochain is **_all state is local state_** and _nodes_ are the holders of local state. Each of my devices is a different node. According to my definition of agent, "any entity with the capacity to sense and respond to its environment", holochain _nodes_ do, indeed, qualify as _agents_. But they are distinct from _human agents_. In essence the "vault" pattern is a way of creating a _human-agent_ abstraction on top of a set of _node-agents_.
+
+The following figure shows an example of a single node in a holochain app.  
+
+![Anatomy of a Holochain Node](https://github.com/evomimic/holo-health/blob/master/images/anatomy-of-a-node.png)
+_Figure 4. Anatomy of a Single PHV Node_
+
+A _node_ maintains two persistent data stores for each _hApp_ that _node_ has joined: (1) a **_local source chain_** and a **_shard_** of the _DHT_ for that _hApp_. Additionally, the _node_ runs a webserver that allows data to be retrieved from either the _local source chain_ or the _DHT_ and presented in a web browser (using the UI code defined in the _hApp's DNA folder_. Finally, the _node_ also runs a _DHT server_ that is responsible for helping to maintain a [World Model](https://developer.holochain.org/World_Model) by communicating with other nodes that have joined that _hApp_.
+
 The following figure shows an example deployment architecture for an instance of the _Personal Health Vault_ (phv) app.
 ![Personal Health Vault Deployment Example](https://github.com/evomimic/holo-health/blob/master/images/phv-deployment-example.png)
 
@@ -53,7 +62,8 @@ NOTE: Currently, once cloned, any linkage to the original app is lost. So if new
 
 In the example, four _nodes_ have joined steves-phv-app.
 
-**_TODO: insert discussion of membrane functions and restrictions on what nodes can join an app_**
+**_TODO: insert discussion of membrane functions and restrictions on what nodes can join an app_. Is this even possible??? see [Issue #1](https://github.com/evomimic/holo-health/issues/1)** 
 
-_Figure 4. Anatomy of a Single PHV Node_
+
+
 

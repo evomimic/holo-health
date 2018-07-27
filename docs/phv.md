@@ -32,10 +32,13 @@ Each observation records one fact.
 * `number` is the value for this observation (in initial PoC, only numeric values are allowed for observations)
 * `units` is the unit of measure associated with the value
 * `date` is the observation date.
+* `provenance` is a reference to the transaction that resulted in this observation being recorded. 
 
-The _Health Observation_ zome provides only two functions:
-* `create` for creating new _Health Observations_
-* `myObservations` to return a list of all of my _HealthObservation_
+The _Health Observation_ zome provides the following functions:
+* `recordSelfObservation` for creating new _Health Observations_ for which I am both the _subject_ and _observer_.
+* `myObservations` to return a list of all of my _HealthObservations_
+
+A `recordObservation` _bridge function_ is included that allows other hApps (e.g., the _Health Service Delivery hApp_) to record observations where I am the _subject_, but another agent (e.g., a physician, medical lab, etc.) is the _observer_.
 
 To provide more robust searching options (when the list of _HealthObservation_ gets unwieldy), the [anchors mixin](https://github.com/holochain/mixins/tree/master/anchors) can be added to the _HealthObservation_ zome.
 
@@ -49,13 +52,13 @@ To understand a possible deployment model for the _PoC Personal Health Vault hAp
 
 _Figure 4. Anatomy of a Single PHV Node_
 
-A _node_ maintains two persistent data stores for each _hApp_ the _node_ has joined: (1) a **_local source chain_** and (2) a **_shard_** of the _DHT_ for that _hApp_. The _local source chain_ is a hashChain that links a series of _entries_ (NOT _blocks_!). The initial entry (_H0_, referred to as the _genesis entry_ contains a reference to (hash of) the _DNA file_ for the _hApp_. This ensures that all nodes that join this _hApp_ are running the same application code (or can be detected if they attempt to run different code). The next entry (_H1_)contains a reference to the _user_key_ for this specific node. Subsequent entries (_H2_ .. _Hn_) each reference a _data record_ that encodes a change to the application state. All of the headers are _hashchained_ to their predecessor, thus enforcing a local ordering of state changes (on the _local source chain_) while also ensuring the integrity of the entire chain.
+All _holochain nodes_ maintain two persistent data stores for each _hApp_ the _node_ has joined: (1) a **_local source chain_** and (2) a **_shard_** of the _DHT_ for that _hApp_. The _local source chain_ is a hashChain that links a series of _entries_ (NOT _blocks_!). The initial entry (_H0_, referred to as the _genesis entry_ contains a reference to (hash of) the _DNA file_ for the _hApp_. This ensures that all nodes that join this _hApp_ are running the same application code (or can be detected if they attempt to run different code). The next entry (_H1_)contains a reference to the _user_key_ for this specific node. Subsequent entries (_H2_ .. _Hn_) each reference a _data record_ that encodes a change to the application state. All of the headers are _hashchained_ to their predecessor, thus enforcing a local ordering of state changes (on the _local source chain_) while also ensuring the integrity of the entire chain.
 
 Additionally, the _node_ runs a webserver that allows data to be retrieved from either the _local source chain_ or the _DHT_ and presented in a web browser (using the UI code defined in the _hApp's DNA folder_. 
 
 Finally, the _node_ also runs a _DHT server_ that is responsible for helping to maintain a [World Model](https://developer.holochain.org/World_Model) by communicating with other nodes that have joined that _hApp_.
 
-The following figure shows an example deployment architecture for an instance of the _Personal Health Vault_ (phv) app.
+The following figure shows an example deployment architecture for an instance of the _Personal Health Vault_ (phv) hApp.
 ![Personal Health Vault Deployment Example](https://github.com/evomimic/holo-health/blob/master/images/phv-deployment-example.png)
 
 _Figure 3. Personal Health Vault Deployment Example_
@@ -68,9 +71,9 @@ The clone operation copies the DNA file from the original _phv_ app (so it share
 
 NOTE: Currently, once cloned, any linkage to the original app is lost. So if new versions of the _phv_ app's DNA are published, the cloned app will have to be manually updated. I have filed [Issue #154 DNA as 1st Class Object?](https://github.com/holochain/holochain-rust/issues/154) on the _holochain-rust_ project to enable cloned projects to be notified when new versions of the original app have been accepted, with the option to `pull` the new version into the cloned app.
 
-In the example, four _nodes_ have joined steves-phv-app.
+In the example, four _nodes_ have joined _steves-phv-hApp_: _Steve's Phone_, _Steve's LapTop_, _Steve's HoloPort_, and _Terri's Phone_. Each has its own _local source chain_, _DHT shard_, _WebServer_ and _DHT Server_.
 
-**_TODO: insert discussion of membrane functions and restrictions on what nodes can join an app_. Is this even possible??? see [Issue #1](https://github.com/evomimic/holo-health/issues/1)** 
+**_TODO: insert discussion of membrane functions and restrictions on what nodes can join an app_**. Where should such restrictions be specified? Decisions on whether to allow another hApp to _**bridge**_ this app can be encoded in the _bridgeGenesis callback functions_ of zomes. If any zome's _bridgeGenesis_ function returns `false` the bridge is not allowed to be established. I'm assuming decisions on whether to allow a _node_ to _**join**_ an hApp could similarly be encoded in the _genesis callback function_ of zomes. Is this a sound assumption??? see [Issue #1](https://github.com/evomimic/holo-health/issues/1)** 
 
 
 

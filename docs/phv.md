@@ -1,5 +1,9 @@
-# Personal Health Vault Application
-A _**Personal Health Vault**_ is a private container for all of my health information. It is built around the concept of a _**HealthCard**_. Briefly, a _HealthCard_...
+# Personal Health Vault Application (phv)
+A _**Personal Health Vault**_ is a private container for all of my health information. This hApp is inspired by and loosely patterned after the [holo-vault](https://github.com/holochain/holo-vault) application. _Holo-vault_ is intended as a general identity manager application that allows storage of _personal profile information_ and to allow different subsets of those profile attributes to be mapped to _personas_ that can be shared with other applications (although the exact method for sharing is not clear to me). 
+
+_Personal Health Vault_ is built around the concept of a _**HealthCard**_. 
+
+Briefly, a _HealthCard_...
 is a private, but shareable, container of Health Information (any health request, event, condition).
 * is owned by the subject of the card, but carries no _Personally Identifying Information_ (_PII_). When shared it is only associated with a pseudonym.
 * are stored in a _Personal Health Journal_ that provides a complete, holistic view of my health events, conditions, and info.
@@ -10,8 +14,6 @@ is a private, but shareable, container of Health Information (any health request
 * may be shared under an _Agreement_ that specifies the authorities and responsibilities of each Party to the agreement. The Agreement may also specify some reciprocal value flow (i.e., people may get paid for sharing HealthCards with others).
 * Are protected such that _only authorized users under a valid agreement_ have access to the HealthCard.
 * Have an _audit trail_ of all accesses to that health card.
-
-Figure 1 provides examples of the types of HealthCards that may be defined.
 
 ![Figure 1. Examples of HealthCard Information](https://github.com/evomimic/holo-health/blob/master/images/healthcard-info-types.png)
 _Figure 1. Examples of HealthCard Information_
@@ -47,23 +49,24 @@ To understand a possible deployment model for the _PoC Personal Health Vault hAp
 
 _Figure 4. Anatomy of a Single PHV Node_
 
-A _node_ maintains two persistent data stores for each _hApp_ that _node_ has joined: (1) a **_local source chain_** and a **_shard_** of the _DHT_ for that _hApp_. The _local source chain_ is a hashChain that links a series of _entries_ (NOT _blocks_!). The initial entry (_H0_, referred to as the _genesis entry_ contains a reference to (hash of) the _DNA file_ for the _hApp_. This ensures that all nodes that join this _hApp_ are running the same application code (or can be detected if they attempt to run different code). The next entry (_H1_)contains a reference to the _user_key_ for this node. Subsequent entries each reference a _data record_ that encodes a change to the application state. All of the headers are _hashchained_ to their predecessor, thus enforcing a local ordering of state changes (on the _local source chain_) while also ensuring the integrity of the entire chain.
+A _node_ maintains two persistent data stores for each _hApp_ the _node_ has joined: (1) a **_local source chain_** and (2) a **_shard_** of the _DHT_ for that _hApp_. The _local source chain_ is a hashChain that links a series of _entries_ (NOT _blocks_!). The initial entry (_H0_, referred to as the _genesis entry_ contains a reference to (hash of) the _DNA file_ for the _hApp_. This ensures that all nodes that join this _hApp_ are running the same application code (or can be detected if they attempt to run different code). The next entry (_H1_)contains a reference to the _user_key_ for this specific node. Subsequent entries (_H2_ .. _Hn_) each reference a _data record_ that encodes a change to the application state. All of the headers are _hashchained_ to their predecessor, thus enforcing a local ordering of state changes (on the _local source chain_) while also ensuring the integrity of the entire chain.
 
-Additionally, the _node_ runs a webserver that allows data to be retrieved from either the _local source chain_ or the _DHT_ and presented in a web browser (using the UI code defined in the _hApp's DNA folder_. Finally, the _node_ also runs a _DHT server_ that is responsible for helping to maintain a [World Model](https://developer.holochain.org/World_Model) by communicating with other nodes that have joined that _hApp_.
+Additionally, the _node_ runs a webserver that allows data to be retrieved from either the _local source chain_ or the _DHT_ and presented in a web browser (using the UI code defined in the _hApp's DNA folder_. 
+
+Finally, the _node_ also runs a _DHT server_ that is responsible for helping to maintain a [World Model](https://developer.holochain.org/World_Model) by communicating with other nodes that have joined that _hApp_.
 
 The following figure shows an example deployment architecture for an instance of the _Personal Health Vault_ (phv) app.
 ![Personal Health Vault Deployment Example](https://github.com/evomimic/holo-health/blob/master/images/phv-deployment-example.png)
 
 _Figure 3. Personal Health Vault Deployment Example_
 
-In this example, new instance of the _phv_ app has been created, via
+In this example, a new instance of the _phv_ app has been created, via
 
 `hcdev init --clone <path-to-original-phv-app-dir> steves-phv-app`
 
 The clone operation copies the DNA file from the original _phv_ app (so it shares the same code as the _phv_ app), but gives it a different UUID (so it will have its own DHT). 
 
-NOTE: Currently, once cloned, any linkage to the original app is lost. So if new versions of the _phv_ app's DNA are published, the cloned app will have to be manually updated. I have filed [Issue #154 DNA as 1st Class Object?](https://github.com/holochain/holochain-rust/issues/154) on the holochain-rust project to enable cloned projects to be notified when new versions of the original app have been accepted, with the option to `pull` the new version into the cloned app.
-
+NOTE: Currently, once cloned, any linkage to the original app is lost. So if new versions of the _phv_ app's DNA are published, the cloned app will have to be manually updated. I have filed [Issue #154 DNA as 1st Class Object?](https://github.com/holochain/holochain-rust/issues/154) on the _holochain-rust_ project to enable cloned projects to be notified when new versions of the original app have been accepted, with the option to `pull` the new version into the cloned app.
 
 In the example, four _nodes_ have joined steves-phv-app.
 

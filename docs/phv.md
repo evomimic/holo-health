@@ -1,5 +1,5 @@
 # Personal Health Vault Application (phv)
-A _**Personal Health Vault**_ is a private container for all of my health information. This hApp is inspired by and loosely patterned after the [holo-vault](https://github.com/holochain/holo-vault) application. _Holo-vault_ is intended as a general identity manager application that allows storage of _personal profile information_ and to allow different subsets of those profile attributes to be mapped to _personas_ that can be shared with other applications (although the exact method for sharing is not clear to me). 
+A _**Personal Health Vault**_ is a private container for all of my health information. This hApp is inspired by and loosely patterned after the [holo-vault](https://github.com/holochain/holo-vault) application. _Holo-vault_ is intended as a general identity manager application that provides storage of _personal profile attributes_ and allows different subsets of those profile attributes to be mapped to _personas_ that can be shared with other applications (although the exact method for sharing is not clear to me). 
 
 _Personal Health Vault_ is built around the concept of a _**HealthCard**_. 
 

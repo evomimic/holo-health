@@ -17,28 +17,37 @@ _Figure 1. Health Market Value Flows_
 
 _HealthCare Providers_ create and publish _Offers_ to the _Health Market_ where they can be discovered by _Persons_. A Person can _accept_ an _offer_, creating a _Signed Agreement_ between them and the _Healthcare Provider_. 
 
+## DNA
 The DNA for the _Health Market hApp_ will include a single _Offer_ zome as shown in Figure 2.
 
 ![Figure 2. PoC Health Market hApp (hm) DNA](https://github.com/evomimic/holo-health/blob/master/images/hm-dna.png)
 
 _Figure 2. PoC Health Market hApp (hm) DNA_
 
-Each observation records one fact. 
-* `subjectHash` refers to the person that is the subject of the observation
-* `observerHash` refers to the agent (person or organization) that made the observation
-* `code` indicates the type of fact (e.g., _height_, _weight_)
-* `number` is the value for this observation (in initial PoC, only numeric values are allowed for observations)
-* `units` is the unit of measure associated with the value
-* `date` is the observation date.
-* `provenance` is a reference to the transaction that resulted in this observation being recorded. 
+The following fields are provided for the _Offer_ Zome Entry in the PoC:
+* `type: string` identifies the type of the offer. In the POC this is a simple string. Going forward a registry of _offer types_ can be included in the Health Market.
+* `by: agentHash` refers to the _healthcare provider_ that is extending the _offer_
+* `description: String` provides a brief description of the _offer_
+* `isActive: boolean` indicates whether this _offer_ is currently _active_. Only _active offers_ can be _accepted_.
+* `startDate: String` indicates the date when the _offer_ became or will become _active_.
+* `endDate: String` indicates the date when the _offer_ will expire.
+* `offerName: String` provides a short human-readable name for the _offer_.
+* `dataRequested: Array<Strings>`provides a list of the Healthcare Observation types (e.g., _height_, _weight_, _age_, _bloodType_, _LDL_, _HDL_, etc.) that the _healthcare provider_ needs to receive from the consumer in order to delivery\ this service.
+* `valueReturned: String` indicates the type of Healthcare Observation that the _healthcare provider_ will return to the consumer based on analysis of the data gathered from the consumer. 
 
-The _Health Observation_ zome provides the following functions:
-* `recordSelfObservation` for creating new _Health Observations_ for which I am both the _subject_ and _observer_.
-* `myObservations` to return a list of all of my _HealthObservations_
+Note that the PoC will (initially) support only free services, i.e., it does not allow _offers_ to define a _currency flow_.
 
-A `recordObservation` _bridge function_ is included that allows other hApps (e.g., the _Health Service Delivery hApp_) to record observations where I am the _subject_, but another agent (e.g., a physician, medical lab, etc.) is the _observer_.
+The _Offer_ zome provides the following functions:
+* `createOffer` -- allows _healthcare providers_ to create and elaborate new _offers_. _Offers_ do not become available in the marketplace until they are published.
+* `publishOffer`-- makes an _offer_ visible in the market and available to be accepted. This function can optionally specify a `startDate` and/or an `endDate`. If no `startDate` is provided, the current date will be used. If no `endDate` is provided, the _offer_ is assumed to remain active until explcitly withdrawn.
+* `withdrawOffer` -- removes an _offer_ from the market. Note that _offers_ are not deleted and withdrawing an _offer_ has no affect on any _agreements_ that have previously been linked to that _offer_. This function can optionally specify a an `endDate`. If no `endDate` is provided, the _offer_ is withdrawn immediately (i.e., it's `isActive` attribute is set to `false`).. 
+* `myOffers: [Offer]`
+* `availableOffers: [Offer]`
+* `acceptOffer`
 
-To provide more robust searching options (when the list of _HealthObservation_ gets unwieldy), the [anchors mixin](https://github.com/holochain/mixins/tree/master/anchors) can be added to the _HealthObservation_ zome.
+A `getOffer` _bridge function_ is provided so the _Health Service Delivery hApp_ can retrieve information about the _offer_ associated with an _agreement_. 
+
+To provide more robust searching options (when the list of _Offers_ gets unwieldy), the [anchors mixin](https://github.com/holochain/mixins/tree/master/anchors) can be added to the _Offer_ zome. Anchors can be used to segregate _offers_ by _offerType_. This can be used to search and filter `myOffers` for _healthcare providers_ and `availableOffers` for consumers.
 
 ## Proof of Concept (PoC) Deployment Architecture Example
 

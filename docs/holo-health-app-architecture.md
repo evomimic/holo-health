@@ -1,6 +1,6 @@
 # Overview
 
-This document presents a high-level view of an _Application Architecture_ that supports the emergence of _**person-centric healthcare ecosystems**_ on top of a _holochain_ based infrastructure. 
+This document presents a high-level view of an _Application Architecture_ that supports the emergence of _**person-centric healthcare ecosystems**_ on top of a _holochain_ based infrastructure. Refer to the [holo-health project README](https://github.com/evomimic/holo-health/blob/master/README.md) for an overview of the project, including its goals and guiding principles.
 
 # High-Level Application Architecture
  The following figure depicts a high-level view of the _Empowered Health Market Application Architecture_. 

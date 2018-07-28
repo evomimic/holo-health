@@ -1,7 +1,7 @@
 # holo-health
 _**Person-Centric Healthcare Ecosystems**_ on top of a _holochain_ based infrastructure.
 
-Code Status: **Pre-alpha**. Not for production use. This application has not been audited for any security validation.
+Code Status: **Pre-alpha Design**. Not for production use. This application has not been audited for any security validation.
 
 ## Goals
    1. Create _**empowered health marketplaces**_ that enable _HealthCare Providers_ to offer health services (both online and in-person) that can be easily discovered and privately subscribed to by individuals.

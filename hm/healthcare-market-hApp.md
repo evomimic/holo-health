@@ -43,7 +43,7 @@ The _Offer_ zome provides the following functions:
 * `withdrawOffer` -- removes an _offer_ from the market. Note that _offers_ are not deleted and withdrawing an _offer_ has no affect on any _agreements_ that have previously been linked to that _offer_. This function can optionally specify a an `endDate`. If no `endDate` is provided, the _offer_ is withdrawn immediately (i.e., it's `isActive` attribute is set to `false`).. 
 * `myOffers: [Offer]` -- allows _healthcare providers_ to retrieve the list of all of their offers. This function relies on offers having been anchored with _provider_ tags and _offerType_ tags. 
 * `availableOffers: [Offer]`-- allows _consumers_ to retrieve the list of all of the offers in the marketplace, filtered by _offerType_
-* `acceptOffer`-- allows a _consumer_ to accept an offer. 
+* `acceptOffer`-- allows a _consumer_ to accept an offer. Doing so will trigger the creation of a new instance of the _Health Service Delivery (hsd)_ hApp for which only the person who accepted the offer and the Healthcare Provider that posted the offer are added as members.
 
 A `getOffer` _bridge function_ is provided so the _Health Service Delivery hApp_ can retrieve information about the _offer_ associated with an _agreement_. 
 
@@ -62,3 +62,18 @@ The _healthcare provider_ nodes are named "API Gateway" to suggest that they rep
 Notice that the _hm_hApp_ is sharded across all seven nodes. Also note that the _consumer nodes_ are hosting BOTH their own _PersonalHealthVault_ hApps AND the _hm_hApp_). 
 
 # Future Enhancements
+The initial PoC design is limited in a number of significant ways. To truly foster the emergence of _person-centric healthcare ecosystems_ will require enhancements in several key areas:
+1. _Healthcare Provider Agent Registry_
+2. Rich _offer types_ ontology, capable of expressing a comprehensive range of services, levaraging international standards
+
+2. Ability to draw on a used to characterize a comprehensive range of services, leveraging industry-standard terminology and service definitions 
+2. FHIR integration
+2. Robust set of standard _offer types_
+3. 4. Support for _pluggable currency flows_.
+
+
+
+
+responsibly-sourced ingredients
+no animal testing
+

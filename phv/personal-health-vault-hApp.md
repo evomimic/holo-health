@@ -76,7 +76,7 @@ NOTE: Currently, once cloned, any linkage to the original app is lost. So if new
 
 In the example, four _nodes_ have joined _steves-phv-hApp_: _Steve's Phone_, _Steve's LapTop_, _Steve's HoloPort_, and _Terri's Phone_. Each has its own _local source chain_, _DHT shard_, _WebServer_ and _DHT Server_.
 
-**_TODO: insert discussion of membrane functions and restrictions on what nodes can join an app_**. Where should such restrictions be specified? Decisions on whether to allow another hApp to _**bridge**_ this app can be encoded in the _bridgeGenesis callback functions_ of zomes. If any zome's _bridgeGenesis_ function returns `false` the bridge is not allowed to be established. I'm assuming decisions on whether to allow a _node_ to _**join**_ an hApp could similarly be encoded in the _genesis callback function_ of zomes. Is this a sound assumption??? see [Issue #1](https://github.com/evomimic/holo-health/issues/1)** 
+**_TODO: insert discussion of membrane functions and restrictions on what nodes can join an app_**. Where should such restrictions be specified? Decisions on whether to allow another hApp to _**bridge**_ this app can be encoded in the _bridgeGenesis callback functions_ of zomes. If any zome's _bridgeGenesis_ function returns `false` the bridge is not allowed to be established. I'm assuming decisions on whether to allow a _node_ to _**join**_ an hApp could similarly be encoded in the _genesis callback function_ of zomes. Is this a sound assumption??? see **[Issue #1]** 
 
 # Future Enhancements
 As noted above, the initial PoC implementation will include a very simplistic concept of _HealthObservation_. Going forward, the intent is to support the full [FHIR Observation Resource](https://www.hl7.org/fhir/observation.html):

@@ -15,4 +15,4 @@ Code Status: **Pre-alpha Design**. Not for production use. This application has 
 _TODO_
 
 ## Architecture
-Refer to [Holo-Health Application Architecture](https://github.com/evomimic/holo-health/blob/master/docs/holo-health-app-architecture.md) for an overview of the various apps comprising the _Holo-Health_ architecture.
+Refer to [Holo-Health Application Architecture](holo-health-app-architecture.md) for an overview of the various apps comprising the _Holo-Health_ architecture.

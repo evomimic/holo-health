@@ -55,4 +55,8 @@ To provide more robust searching options (when the list of _Offers_ gets unwield
 
 _Figure 3. PoC Health Market hApp (hm) Deployment Example_
 
+The example shown in _Figure 3_ shows a total of seven _nodes_ belonging to three different _healthcare providers_ (Good Health, Thrive, Inc. and Get Healthy, Inc.) and two different _consumers_ (Steve and Vidya) participating in the Health Market. (NOTE: In this figure, an hApp deployed on a node is depicted as a rounded rectangle (e.g., _hm_hApp_). The internal anatomy of the hApp on a node (i.e., its _DHT server_, _DHT shard_, _local source chain_, and _web server_) is not shown, but keep in mind that all of these components are included for each deployment of a hApp to a node.)
+
+Notice that the _hm_hApp_ is sharded across all seven nodes. Also note that the _consumer nodes_ are hosting BOTH a their own _PersonalHealthVault_ hApps AND the _hm_hApp_). 
+
 # Future Enhancements

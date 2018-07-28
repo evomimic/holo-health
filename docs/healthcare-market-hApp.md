@@ -41,14 +41,18 @@ The _Offer_ zome provides the following functions:
 * `createOffer` -- allows _healthcare providers_ to create and elaborate new _offers_. _Offers_ do not become available in the marketplace until they are published.
 * `publishOffer`-- makes an _offer_ visible in the market and available to be accepted. This function can optionally specify a `startDate` and/or an `endDate`. If no `startDate` is provided, the current date will be used. If no `endDate` is provided, the _offer_ is assumed to remain active until explcitly withdrawn.
 * `withdrawOffer` -- removes an _offer_ from the market. Note that _offers_ are not deleted and withdrawing an _offer_ has no affect on any _agreements_ that have previously been linked to that _offer_. This function can optionally specify a an `endDate`. If no `endDate` is provided, the _offer_ is withdrawn immediately (i.e., it's `isActive` attribute is set to `false`).. 
-* `myOffers: [Offer]`
-* `availableOffers: [Offer]`
-* `acceptOffer`
+* `myOffers: [Offer]` -- allows _healthcare providers_ to retrieve the list of all of their offers. This function relies on offers having been anchored with _provider_ tags and _offerType_ tags. 
+* `availableOffers: [Offer]`-- allows _consumers_ to retrieve the list of all of the offers in the marketplace, filtered by _offerType_
+* `acceptOffer`-- allows a _consumer_ to accept an offer. 
 
 A `getOffer` _bridge function_ is provided so the _Health Service Delivery hApp_ can retrieve information about the _offer_ associated with an _agreement_. 
 
 To provide more robust searching options (when the list of _Offers_ gets unwieldy), the [anchors mixin](https://github.com/holochain/mixins/tree/master/anchors) can be added to the _Offer_ zome. Anchors can be used to segregate _offers_ by _offerType_. This can be used to search and filter `myOffers` for _healthcare providers_ and `availableOffers` for consumers.
 
 ## Proof of Concept (PoC) Deployment Architecture Example
+
+![Figure 3. PoC Health Market hApp (hm) Deployment Example](https://github.com/evomimic/holo-health/blob/master/images/hm-deployment-example.png)
+
+_Figure 3. PoC Health Market hApp (hm) Deployment Example_
 
 # Future Enhancements

@@ -12,7 +12,7 @@ The goal for the initial Proof-of-Concept (PoC) is to demonstrate the basic appl
 ## DNA
 ![Figure 1. Health Service Delivery DNA](../images/hsd-dna.png)
 
-# Proof of Concept (PoC) Deployment Architecture Example
+## Proof of Concept (PoC) Deployment Architecture Example
 ![Figure 2. Example hsd hApp Deployment](../images/hsd-deployment-example.png)
 
 # Future Enhancements

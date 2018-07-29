@@ -85,3 +85,6 @@ _Figure 4. UML Representation of the FHIR Observation Resource_
 * Also, the concept of a HealthCard will be implemented so that different types of FHIR resources beyond _Observations_ (e.g., [DiagnosticReports](https://www.hl7.org/fhir/diagnosticreport.html), [Medications](https://www.hl7.org/fhir/medication.html), [Immunizations](https://www.hl7.org/fhir/immunization.html), etc.)
 * _**Obversation Provenence**_ Provide a full, persistent, chain of custody that confirms the source for each _observation_ is immutably and non-repudiably identified, and the the _observtion_ has not been altered in any way.
 * _**Add security protections**_ through encryption of data at rest using my _public key_ so that only I can decrypt the information.
+
+<up to [Holo-Health Application Architecture](../holo-health-app-architecture.md)_>           
+<_forward to [Healthcare Market hAPP Application Architecture](../hm/healthcare-market-hApp.md)>_

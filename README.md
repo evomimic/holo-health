@@ -16,3 +16,7 @@ Code Status: **Pre-alpha Design**. Not for production use. This application has 
 
 ## Architecture
 Refer to [Holo-Health Application Architecture](holo-health-app-architecture.md) for an overview of the various apps comprising the _Holo-Health_ architecture.
+
+# License
+
+All the code in this repository is released under the Mozilla Public License v2.0, for more information take a look at the LICENSE file.

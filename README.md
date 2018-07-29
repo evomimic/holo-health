@@ -15,7 +15,7 @@ Code Status: **Pre-alpha Design**. Not for production use. This application has 
    1. _**Encourage Collaboration.**_ Feedback and contributions from other members of the holochain community are welcomed!
 
 ## Architecture
-Refer to [Holo-Health Application Architecture](holo-health-app-architecture.md) for an overview of the various apps comprising the _Holo-Health_ architecture.
+Refer to [Holo-Health Application Architecture](holo-health-app-architecture.md) to explore the overall architecture and to drill into the various hAapps that, collectively, comprise _holo-health_.
 
 # License
 

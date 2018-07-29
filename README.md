@@ -20,24 +20,11 @@ Refer to [Holo-Health Application Architecture](holo-health-app-architecture.md)
 # License
 
 Holo-health is software intended to foster the emergence and growth of _**Person-Centric Healthcare Ecosystems**_ on top of a _holochain_ based infrastructure.
-    Copyright (C) 2018  Steve Melville, Evolutionary Enterprises LLC
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+Copyright (C) 2018  Steve Melville, Evolutionary Enterprises LLC
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. 
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+The GNU General Public License does not permit incorporating your program into proprietary programs. 
 
-  The GNU General Public License does not permit incorporating your program
-into proprietary programs.  If your program is a subroutine library, you
-may consider it more useful to permit linking proprietary applications with
-the library.  If this is what you want to do, use the GNU Lesser General
-Public License instead of this License.  But first, please read
-<https://www.gnu.org/licenses/why-not-lgpl.html>.
+Refer to the [LICENSE.txt file](LICENSE.txt) for license details.

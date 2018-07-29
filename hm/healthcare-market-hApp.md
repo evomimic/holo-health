@@ -24,6 +24,14 @@ The DNA for the _Health Market hApp_ will include a single _Offer_ zome as shown
 
 _Figure 2. PoC Health Market hApp (hm) DNA_
 
+# Future Enhancements
+
+
+
+<up to [Holo-Health Application Architecture](../holo-health-app-architecture.md)_>           
+<_forward to [hsd Application Architecture](../hsd/healthcare-service-delivery-hApp.md)>_
+
+
 The following fields are provided for the _Offer_ Zome Entry in the PoC:
 * `type: string` identifies the type of the offer. In the POC this is a simple string. Going forward a registry of _offer types_ can be included in the Health Market.
 * `by: agentHash` refers to the _healthcare provider_ that is extending the _offer_

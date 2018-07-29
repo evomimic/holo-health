@@ -35,7 +35,6 @@ Each observation records one fact.
 * `number` is the value for this observation (in initial PoC, only numeric values are allowed for observations)
 * `units` is the unit of measure associated with the value
 * `date` is the observation date.
-* `provenance` is a reference to the transaction that resulted in this observation being recorded. 
 
 The _Health Observation_ zome provides the following functions:
 * `recordSelfObservation` for creating new _Health Observations_ for which I am both the _subject_ and _observer_.
@@ -79,10 +78,9 @@ In the example, four _nodes_ have joined _steves-phv-hApp_: _Steve's Phone_, _St
 **_TODO: insert discussion of membrane functions and restrictions on what nodes can join an app_**. Where should such restrictions be specified? Decisions on whether to allow another hApp to _**bridge**_ this app can be encoded in the _bridgeGenesis callback functions_ of zomes. If any zome's _bridgeGenesis_ function returns `false` the bridge is not allowed to be established. I'm assuming decisions on whether to allow a _node_ to _**join**_ an hApp could similarly be encoded in the _genesis callback function_ of zomes. Is this a sound assumption??? see **[Issue #1](https://github.com/evomimic/holo-health/issues/1)** 
 
 # Future Enhancements
-As noted above, the initial PoC implementation will include a very simplistic concept of _HealthObservation_. Going forward, the intent is to support the full [FHIR Observation Resource](https://www.hl7.org/fhir/observation.html):
-
+As noted above, the initial PoC implementation will include a very simplistic concept of _HealthObservation_. Going forward, the following enhancements are being considered:
+* Support for the full [FHIR Observation Resource](https://www.hl7.org/fhir/observation.html):
 ![FHIR Observation Resouce UML](https://github.com/evomimic/holo-health/blob/master/images/fhir-observation-resource.png)
-
 _Figure 4. UML Representation of the FHIR Observation Resource_
-
-Also, the concept of a HealthCard will be implemented so that different types of FHIR resources beyond _Observations_ (e.g., [DiagnosticReports](https://www.hl7.org/fhir/diagnosticreport.html), [Medications](https://www.hl7.org/fhir/medication.html), [Immunizations](https://www.hl7.org/fhir/immunization.html), etc.)
+* Also, the concept of a HealthCard will be implemented so that different types of FHIR resources beyond _Observations_ (e.g., [DiagnosticReports](https://www.hl7.org/fhir/diagnosticreport.html), [Medications](https://www.hl7.org/fhir/medication.html), [Immunizations](https://www.hl7.org/fhir/immunization.html), etc.)
+* _** Obversation Provenence**_ Provide a full, persistent, chain of custody that confirms the source for each _observation_ is immutably and non-repudiably identified, and the the _observtion_ has not been altered in any way.

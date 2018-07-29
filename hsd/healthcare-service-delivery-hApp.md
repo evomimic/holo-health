@@ -10,7 +10,9 @@ The _Healthcare Service Delivery hApp_ is intended to support a very broad range
 The goal for the initial Proof-of-Concept (PoC) is to demonstrate the basic application architecture and hApp collaboration model. As such, a very simplistic concept of healthcare service delivery will be implemented in the PoC. 
 
 ## DNA
+![Figure 1. Health Service Delivery DNA](../images/hsd-dna.png)
 
 # Proof of Concept (PoC) Deployment Architecture Example
+![Figure 2. Example hsd hApp Deployment](../images/hsd-deployment-example.png)
 
 # Future Enhancements

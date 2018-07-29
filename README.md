@@ -9,14 +9,10 @@ Code Status: **Pre-alpha Design**. Not for production use. This application has 
    1. Enable _**better health outcomes**_ by unifying all of an individual's health observations into a single _**Personal Health Record**_ (PHR). Observations added by _**any healthcare provider**_ in my ecosystem are added to my _PHR_.
    1. _Design in_ direct support for compliance with relevant healthcare (e.g., HIPAA/HITECH) and personal information regulations (e.g., GDPR). 
    1. Support traditional _**currency-for-service**_ flows while also allowing an open-ended set of _agreement types_ to be used to support _**alternative reciprocal value flows**_ (e.g., _alternative currencies_, _barter_, or _gift economy_). 
-
-
-## Guiding Principles
-_**P1 Primacy-of-the-Individual**_ -- The preponderance of applications on the internet (Facebook, Amazon, Netflix, Google, Uber, Twitter, etc.) are designed around the primacy of the application over the individual. They serve the companies that have created them. Each application offers individual user accounts and maintains its own information about that individual. Increasingly, they are gathering information about the people who use those applications with an eye towards then pushing recommendations, products, or services at them. If an individual interacts with multiple such applications information about them is fragmented into each of these databases. Individuals have limited control over what information is gathered, how it is used and/or who it is shared with. The burden of keeping such information consistent, accurate and up-to-date falls to the individual (i.e., by updating each profile individually). _Holo-health_ reverses this picture by first and foremost serving the individual.
-
-_**P2 Personal-Information-Stewardship**_ -- individuals are the stewards of their own information and it is they who make the decisions about whether, how and with whom their information is shared.
-
-_**P3 Transparency**_ -- The more accurate, comprehensive and up-to-date the information that a _healthcare provider_ has about the totality of an individual's medical history, conditions and life events, the better they are able to diagnose accurately and coordinate care plans across a team of _healthcare providers_ collaborating with the individual. There is a natural tension between these last two principles (_P2_ and _P3). Per _P1 Primacy of the Individual_, each individual is free and empowered by _holo-health_ to find their own balance point between privacy and transparency and they can adjust this balance point over time. 
+   
+## Additional PoC Goals   
+   1. _**Showcase Holochain Capabilities and Design Patterns**_ This _Proof of Concept_ (_PoC_) is intended to serve as a learning vehicle for both its primary author and (hopefully!) other holochain application developers. This includes viewing hApp's as micro-services that may be composed and choreographed in different ways (as opposed to just monolithic point solutions). Also, design choices tend to favor holochain capabilities even in cases when, in a true production project, alternate solutions may be preferable.
+   1. _**Encourage Collaboration.**_ Feedback and contributions from other members of the holochain community are welcomed!
 
 ## Architecture
 Refer to [Holo-Health Application Architecture](holo-health-app-architecture.md) for an overview of the various apps comprising the _Holo-Health_ architecture.

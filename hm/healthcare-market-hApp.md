@@ -2,7 +2,7 @@
 The _Healthcare Market hApp (hm)_ is one of a set of _holo-health_ hApp's designed to work together to support the emergence of _**person-centric healthcare ecosystems**_ on top of a _holochain_ based infrastructure. For an overview of the project, including its goals and guiding principles, refer to the [holo-health project README](../README.md). For an architectural overview of holo-health, refer to [Holo-Health App Architecture](../holo-health-app-architecture.md) .
 
 # Overview
-This hApp provides a _public marketplace_ where _Health Care Providers_ can _**offer**_ healthcare services. Each _offer_ specifies the _terms_ under which people can avail themselves of that service. Each Marketplace instance (DHT) can specify a set of principles that all providers in that marketplace are committed to following. Potential healthcare consumers can search for marketplaces whose principles align with their personal values and then search within that marketplace for services they feel may benefit them. If they find an _offer_ for a _service_ they want and whose terms they find acceptable, they can choose to _accept_ the _offer_. _Accepting_ an offer results in a new instance of a _Health Service Delivery hApp_ being created for which only the person who accepted the offer and the Healthcare Provider that posted the offer are added as members. Thus, although services are _offered_ publicly, the _service relationship_ between the _healthcare provider_ and the _consumer_ remains private.
+This hApp provides a _public marketplace_ where _Health Care Providers_ can _**offer**_ healthcare services. Each _offer_ specifies the _terms_ under which people can avail themselves of that service. Each Marketplace instance (DHT) can specify a set of principles that all providers in that marketplace are committed to following. Potential healthcare consumers can search for marketplaces whose principles align with their personal values and then search within that marketplace for services they feel may benefit them. If they find an _offer_ for a _service_ they want and whose terms they find acceptable, they can choose to _accept_ the _offer_. _Accepting_ an offer results in a new instance of a [_Health Service Delivery hApp_](../hsd/healthcare-service-delivery-hApp.md) being created for which only the person who accepted the offer and the Healthcare Provider that posted the offer are added as members. Thus, although services are _offered_ publicly, the _service relationship_ between the _healthcare provider_ and the _consumer_ remains private.
 
 # Proof of Concept (PoC) Simplistic Implementation 
 The goal for the initial Proof-of-Concept (PoC) is to demonstrate the basic application architecture and hApp collaboration model. As such, a very simplistic concept of healthcare market will be implemented in the PoC. 
@@ -24,13 +24,6 @@ The DNA for the _Health Market hApp_ will include a single _Offer_ zome as shown
 
 _Figure 2. PoC Health Market hApp (hm) DNA_
 
-# Future Enhancements
-
-
-
-<up to [Holo-Health Application Architecture](../holo-health-app-architecture.md)_>           
-<_forward to [hsd Application Architecture](../hsd/healthcare-service-delivery-hApp.md)>_
-
 
 The following fields are provided for the _Offer_ Zome Entry in the PoC:
 * `type: string` identifies the type of the offer. In the POC this is a simple string. Going forward a registry of _offer types_ can be included in the Health Market.
@@ -51,7 +44,9 @@ The _Offer_ zome provides the following functions:
 * `withdrawOffer` -- removes an _offer_ from the market. Note that _offers_ are not deleted and withdrawing an _offer_ has no affect on any _agreements_ that have previously been linked to that _offer_. This function can optionally specify a an `endDate`. If no `endDate` is provided, the _offer_ is withdrawn immediately (i.e., it's `isActive` attribute is set to `false`).. 
 * `myOffers: [Offer]` -- allows _healthcare providers_ to retrieve the list of all of their offers. This function relies on offers having been anchored with _provider_ tags and _offerType_ tags. 
 * `availableOffers: [Offer]`-- allows _consumers_ to retrieve the list of all of the offers in the marketplace, filtered by _offerType_
-* `acceptOffer`-- allows a _consumer_ to accept an offer. Doing so will trigger the creation of a new instance of the _Health Service Delivery (hsd)_ hApp for which only the person who accepted the offer and the Healthcare Provider that posted the offer are added as members.
+* `acceptOffer`-- allows a _consumer_ to accept an offer. Doing so:
+   * will trigger the creation of a new instance of the _Health Service Delivery (hsd)_ hApp((../hsd/healthcare-service-delivery-hApp.md) for which only the person who accepted the offer and the Healthcare Provider that posted the offer are added as members.
+   * the creation of an _agreement_ within the _hsd_, signed by the _consumer_, that includes a hash reference to the _offer_ signed by the _healthcare provider_
 
 A `getOffer` _bridge function_ is provided so the _Health Service Delivery hApp_ can retrieve information about the _offer_ associated with an _agreement_. 
 
@@ -72,16 +67,18 @@ Notice that the _hm_hApp_ is sharded across all seven nodes. Also note that the 
 # Future Enhancements
 The initial PoC design is limited in a number of significant ways. To truly foster the emergence of _person-centric healthcare ecosystems_ will require enhancements in several key areas:
 1. _Healthcare Provider Agent Registry_
+2. Ability to automatically create pairwise pseudonymous identifiers, enabling _hsd consumers_ to establish a different identity with each _healthcare provider_ to reduce the risk of data breaches through correlation attacks. This may involve leveraging the holochain's [DPKI](https://github.com/holochain/dpki) hApp for managing sets of public/private key pairs.
 2. Rich _offer types_ ontology, capable of expressing a comprehensive range of services, levaraging international standards
+5. Robust set of standard _offer types_
+   * Support for _pluggable currency flows_.
+   * In-person and online services
+3. Support for associating offers with _market-defining guiding principles_ (e.g., _only responsibly-sourced ingredients_ , _no animal testing_, etc.)
+3. Ability to characterize a _comprehensive range of services_, leveraging industry-standard terminology and service definitions 
+4. FHIR integration
 
-2. Ability to draw on a used to characterize a comprehensive range of services, leveraging industry-standard terminology and service definitions 
-2. FHIR integration
-2. Robust set of standard _offer types_
-3. 4. Support for _pluggable currency flows_.
+<up to [Holo-Health Application Architecture](../holo-health-app-architecture.md)_>           
+<_forward to [hsd Application Architecture](../hsd/healthcare-service-delivery-hApp.md)>_
 
 
 
-
-responsibly-sourced ingredients
-no animal testing
 

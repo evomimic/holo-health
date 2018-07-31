@@ -38,7 +38,7 @@ Holochain's _validating DHT_ ensures that Agreements_ are:
    * _**immutable**_ -- the _agreement_ and _offer_ cannot be altered without changing their hash, making the change obvious.
    * _**non-forgeable**_ -- due to the combination of digital signing by both parties and the hash of the contents. 
 
-The _Agreement_ zome provides the following functions:
+The _Agreement_ zome provides the following _functions_:
 
 `getAgreement` -- allows an existing agreement to be retrieved from its id
 `withdrawAgreement` -- sets the `isActive` flag to `false` provided the request to 
@@ -49,12 +49,35 @@ BRIDGE FUNCTIONS:
 
 ### HealthInfoRequest Zome
 
-recordSelfObservation for creating new Health Observations for which I am both the subject and observer.
-myObservations to return a list of all of my HealthObservations
-A recordObservation bridge function is included that allows other hApps (e.g., the Health Service Delivery hApp) to record observations where I am the subject, but another agent (e.g., a physician, medical lab, etc.) is the observer.
+SCHEMA::
+`byAgentRef` -- hash reference to the _healthcare provider_ agent who is making the _HealthInfoRequest_
+`ofAgentRef` -- hash reference to the _consumer_ being asked to respond to this request.
+`underAgreementRef` -- hash reference to the _agreement_ under which the request is being made.
+`requestDate` -- the DateTime of the request.
+`infoRequested`: [string] -- the list of _observation codes_ indicating the types of of personal health information being requested. To be _valid_, this list must ONLY include _codes_ that are designated by the _offer_. 
 
-To provide more robust searching options (when the list of HealthObservation gets unwieldy), the anchors mixin can be added to the HealthObservation zome.
+The _HealthInfoRequest_ zome provides the following _functions_:
+`createRequest` -- used by the _healthcare provider_ to create a new HealthInfoRequest.
+`sendRequest` -- commits the request to the _hsd_ DHT
 
+### HealthInfoResponse Zome
+<TODO>
+SCHEMA:
+`status`: string
+`requestRef`: string
+`responseTime`: string (DateTime)
+`responseInfo: [
+   {
+       code: string,
+        value: number,
+        units: string
+   }
+]`
+
+The _HealthInfoRequest_ zome provides the following _functions_:
+`createResponse` -- 
+`sendResponse` -- 
+`handleResponse` --
 
 
 ## Proof of Concept (PoC) Deployment Architecture Example

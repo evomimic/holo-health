@@ -9,7 +9,6 @@ The _Healthcare Service Delivery hApp_ is intended to support a very broad range
 # Proof of Concept (PoC) Simplistic Implementation 
 The goal for the initial Proof-of-Concept (PoC) is to demonstrate the basic application architecture and hApp collaboration model. As such, a very simplistic concept of _healthcare service delivery_ will be implemented in the PoC.
 
-ges to the _Personal Health Vault (phv)_ hApp to retrieve requested personal health information from the person's vault and also to record observations made by the _Healthcare Provider_ back into the persons's vault.
 * No support for _agreement types_, the PoC will only a support a single, implicitly defined agreement with the following _service flow_:
    1. _Healthcare provider_ issues _HealthInfoRequest_ for specified _observation codes_ from _consumer_
    1. The _hsd hApp_ will automatically check all such requests to ensure they comply with the terms specified in the _agreement_. If not, the request is  rejected.
@@ -20,15 +19,54 @@ ges to the _Personal Health Vault (phv)_ hApp to retrieve requested personal hea
 ## DNA
 ![Figure 1. Health Service Delivery DNA](../images/hsd-dna.png)
 
+The _hsd_ hApp defines three zomes:
+
+### Agreement Zome
+Designates an _agreement_ between a _healthcare provider_ who digitally signed an _offer_ into the _Health Marketplace_ and a _consumer_ who digitally signed their acceptance of the _offer_. The terms of the _agreement_ are as specified in the _offer_. _
+_Agreement Schema_
+
+`offeredByRef`: hash reference to the _healthcare provider_ agent that signed the _offer_ underlying this _agreement_ into the _Health Marketplace_.
+`acceptedByRef`: hash reference to the _consumer_ that accepted the _offer_.
+`offerRef`: hash reference to the signed _offer_.
+`validFrom`: the DateTime at which the Agreement became valid.
+`validThrough`: the DateTime at which the Agreement expires(d).
+`isActive`: simple indicator of whether the _agreement_ is currently active.
+`policies`: [string] -- in the PoC, a simple array of textual policies. These could evolve (after the PoC) to include a diverse array of _**pluggable governance**_ policies (e.g., cancellation policies, governance policies specifying how decisions regarding the agreement are made and disputes handled, non-disclosure agreements, upgrade policies, backward compatibility policies, etc.), some of which may be computationally enforceable policies (e.g., _smart contracts_).
+
+Holochain's _validating DHT_ ensures that Agreements_ are:
+   * _**Non-repudiable**_ -- neither party can claim they didn't enter into the _agreement_. The terms were baked into the _offer_ digitally signed by the _healthcare provider_. The _consumer's_ acceptance of those terms was digitally signed by the _consumer_ (and the body of the signed _agreement_ includes the hash of the _offer_). 
+   * _**immutable**_ -- the _agreement_ and _offer_ cannot be altered without changing their hash, making the change obvious.
+   * _**non-forgeable**_ -- due to the combination of digital signing by both parties and the hash of the contents. 
+
+The _Agreement_ zome provides the following functions:
+
+`getAgreement` -- allows an existing agreement to be retrieved from its id
+`withdrawAgreement` -- sets the `isActive` flag to `false` provided the request to 
+`getOffer` -- allows retreival of the _offer_ associated with the _agreement_
+
+BRIDGE FUNCTIONS:
+`createAgreement` -- allows a new _agreement_ to be made by a _consumer_ based on a (previously-) signed _offer_.
+
+### HealthInfoRequest Zome
+
+recordSelfObservation for creating new Health Observations for which I am both the subject and observer.
+myObservations to return a list of all of my HealthObservations
+A recordObservation bridge function is included that allows other hApps (e.g., the Health Service Delivery hApp) to record observations where I am the subject, but another agent (e.g., a physician, medical lab, etc.) is the observer.
+
+To provide more robust searching options (when the list of HealthObservation gets unwieldy), the anchors mixin can be added to the HealthObservation zome.
+
+
+
 ## Proof of Concept (PoC) Deployment Architecture Example
 ![Figure 2. Example hsd hApp Deployment](../images/hsd-deployment-example.png)
 
 # Future Enhancements
+1. Allow a _personal health vault_ hApp to retrieve all of the _agreements_ for which that person is a _consumer_ (across all _hsd_ instances for that _consumer_).
 1. Handle an extended range of _agreement types_ that enable more complex _service flows_.
    * Pay-per-service transactions using a _**pluggable currency**_
    * More complex _**service choreography**_.
 1. Enhance privacy and security by supporting:
    * pairwise pseudonymous identities
-   * encrypted payloads (using receiving agent's public key, so that only that agent can decrypt the payload).
+   * encrypted payloads (using receiving agent's public key, so that only _that_ agent can decrypt the payload).
 
 

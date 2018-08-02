@@ -22,15 +22,22 @@ The goal for the initial Proof-of-Concept (PoC) is to demonstrate the basic appl
 The _hsd_ hApp defines three zomes:
 
 ### Agreement Zome
-Designates an _agreement_ between a _healthcare provider_ who digitally signed an _offer_ into the _Health Marketplace_ and a _consumer_ who digitally signed their acceptance of the _offer_. The terms of the _agreement_ are as specified in the _offer_. _
+Designates an _agreement_ between a _healthcare provider_ who digitally signed an _offer_ into the _Health Marketplace_ and a _consumer_ who digitally signed their acceptance of the _offer_. The terms of the _agreement_ are as specified in the _offer_.
+
 _Agreement Schema_
 
 `offeredByRef`: hash reference to the _healthcare provider_ agent that signed the _offer_ underlying this _agreement_ into the _Health Marketplace_.
+
 `acceptedByRef`: hash reference to the _consumer_ that accepted the _offer_.
+
 `offerRef`: hash reference to the signed _offer_.
+
 `validFrom`: the DateTime at which the Agreement became valid.
+
 `validThrough`: the DateTime at which the Agreement expires(d).
+
 `isActive`: simple indicator of whether the _agreement_ is currently active.
+
 `policies`: [string] -- in the PoC, a simple array of textual policies. These could evolve (after the PoC) to include a diverse array of _**pluggable governance**_ policies (e.g., cancellation policies, governance policies specifying how decisions regarding the agreement are made and disputes handled, non-disclosure agreements, upgrade policies, backward compatibility policies, etc.), some of which may be computationally enforceable policies (e.g., _smart contracts_).
 
 Holochain's _validating DHT_ ensures that Agreements_ are:
@@ -41,31 +48,47 @@ Holochain's _validating DHT_ ensures that Agreements_ are:
 The _Agreement_ zome provides the following _functions_:
 
 `getAgreement` -- allows an existing agreement to be retrieved from its id
-`withdrawAgreement` -- sets the `isActive` flag to `false` provided the request to 
+
+`withdrawAgreement` -- sets the `isActive` flag to `false` provided the request to
+
 `getOffer` -- allows retreival of the _offer_ associated with the _agreement_
+
 
 BRIDGE FUNCTIONS:
 `createAgreement` -- allows a new _agreement_ to be made by a _consumer_ based on a (previously-) signed _offer_.
 
 ### HealthInfoRequest Zome
 
-SCHEMA::
+SCHEMA:
+
 `byAgentRef` -- hash reference to the _healthcare provider_ agent who is making the _HealthInfoRequest_
+
 `ofAgentRef` -- hash reference to the _consumer_ being asked to respond to this request.
+
 `underAgreementRef` -- hash reference to the _agreement_ under which the request is being made.
+
 `requestDate` -- the DateTime of the request.
-`infoRequested`: [string] -- the list of _observation codes_ indicating the types of of personal health information being requested. To be _valid_, this list must ONLY include _codes_ that are designated by the _offer_. 
+
+`infoRequested`: [string] -- the list of _observation codes_ indicating the types of of personal health information being requested. To be _valid_, this list must ONLY include _codes_ that are designated by the _offer_.
+
 
 The _HealthInfoRequest_ zome provides the following _functions_:
+
 `createRequest` -- used by the _healthcare provider_ to create a new HealthInfoRequest.
+
 `sendRequest` -- commits the request to the _hsd_ DHT
 
 ### HealthInfoResponse Zome
+
 <TODO>
+   
 SCHEMA:
 `status`: string
+
 `requestRef`: string
+
 `responseTime`: string (DateTime)
+
 `responseInfo: [
    {
        code: string,
@@ -75,15 +98,20 @@ SCHEMA:
 ]`
 
 The _HealthInfoRequest_ zome provides the following _functions_:
+
 `createResponse` -- 
+
 `sendResponse` -- 
+
 `handleResponse` --
 
 
 ## Proof of Concept (PoC) Deployment Architecture Example
+
 ![Figure 2. Example hsd hApp Deployment](../images/hsd-deployment-example.png)
 
 # Future Enhancements
+
 1. Allow a _personal health vault_ hApp to retrieve all of the _agreements_ for which that person is a _consumer_ (across all _hsd_ instances for that _consumer_).
 1. Handle an extended range of _agreement types_ that enable more complex _service flows_.
    * Pay-per-service transactions using a _**pluggable currency**_

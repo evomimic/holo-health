@@ -19,7 +19,7 @@ The goal for the initial Proof-of-Concept (PoC) is to demonstrate the basic appl
 ## Application Genesis
 Upon acceptance of an _offer_, _O_, from _service provider_, _P_, by a _service requester_, _R_:
 * A new _hsd_ instance _h_, should be created by one of _R_'s nodes., with _R_ as (initially) the only member (but see [Issue #5](https://github.com/evomimic/holo-health/issues/5)).
-* _R_ and _P_ should be added to the _invitedAgents_ list [see Issue #6](../../issues/6) for _h_, essentially authorizing any _nodes_ acting on behalf of either _R_ or _P_ to join _h_.
+* _R_ and _P_ should be added to the _invitedAgents_ list [see Issue #6](https://github.com/evomimic/holo-health/issues/6) for _h_, essentially authorizing any _nodes_ acting on behalf of either _R_ or _P_ to join _h_.
 * _R_ should be invited (via node-to-node messaging) to join the _h_.
 * The _hsd_ `genesis` function should ensure that only _node-agents_ of for _legal-agents_ who appear in the _invitedAgents_ list will be allowed to _join_ that _hsd_.
 * _(Future)_ If an additional confirmation is required, once _R_ has successfully joined _h_, there could be additional _accept_ function added to the _Agreement Zome_.

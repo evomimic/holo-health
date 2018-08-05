@@ -4,17 +4,25 @@ The _Health Service Delivery hApp_ is one of a set of hApp's designed to work to
 # Overview
 An instance of this _hsd_ hApp is created when a person _accepts_ a _Healthcare Service offer_ placed in the _Healthcare Market_ by a _Healthcare Provider_. The _hsd_ serves as a private channel between the two parties. Both the _agreement_ (which includes a reference to the _offer_ on which the _agreement_ was based) and the _requests_ and _responses_ made by either party, are recorded in the DHT for this hApp instance. This provides a secure, non-forgeable, immutable, non-repudiable audit trail that is necessary for both invoicing and regulatory compliance. 
 
-The _Healthcare Service Delivery hApp_ is intended to support a very broad range of services (including both electronic and in-person) offered under a broad range of _agreement types_. 
+The _Healthcare Service Delivery hApp_ is intended to (eventually) support a very broad range of services (including both electronic and in-person) offered under a broad range of _agreement types_, but the PoC will assume a very simplistic concept of  _healthcare service delivery_.
 
 # Proof of Concept (PoC) Simplistic Implementation 
-The goal for the initial Proof-of-Concept (PoC) is to demonstrate the basic application architecture and hApp collaboration model. As such, a very simplistic concept of _healthcare service delivery_ will be implemented in the PoC.
+The goal for the initial Proof-of-Concept (PoC) is to demonstrate the basic application architecture and hApp collaboration model. The healthcare services targeted for initial implemented in the PoC.
 
-* No support for _agreement types_, the PoC will only a support a single, implicitly defined agreement with the following _service flow_:
+* The PoC will only a support a single, implicitly defined agreement_type with the following _service flow_:
    1. _Healthcare provider_ issues _HealthInfoRequest_ for specified _observation codes_ from _consumer_
    1. The _hsd hApp_ will automatically check all such requests to ensure they comply with the terms specified in the _agreement_. If not, the request is  rejected.
    1. If the _request_ conforms to the _agreement_, the _hsd_ will build a _HealthInfoResponse_ to return to the _healthcare provider_. For each requested _observation code_ for which the consumer's _PersonalHealthRecord_ includes an _observation_, the _observation_ will be included in the response. 
    1. Upon receiving the _HealthInfoResponse_, the _hsd_ will invoke _handleResponse_ to trigger the _healthcare provider's_ analysis logic to analyze the personal health observations returned by the _consumer_ to arrive at a _health recommendation_. The    response is NOT included in the list of _observation codes_ defined in the _offer_, the HealthInfoRequest is rejected.
    1. All HealthInfoRequests, HealthInfoResponses, and Observations recorded are persisted to the DHT.
+
+## Application Genesis
+Upon acceptance of an _offer_, _O_, from _service provider_, _P_, by a _service requester_, _R_:
+* A new _hsd_ instance _h_, should be created by one of _R_'s nodes., with _R_ as (initially) the only member (but see [Issue #5](https://github.com/evomimic/holo-health/issues/5)).
+* _R_ and _P_ should be added to the _invitedAgents_ list for _h_, essentially authorizing any _nodes_ acting on behalf of either _R_ or _P_ to join _h_.
+* _R_ should be invited (via node-to-node messaging) to join the _h_.
+* The _hsd_ `genesis` function should ensure that only _node-agents_ of for _legal-agents_ who appear in the _invitedAgents_ list will be allowed to _join_ that _hsd_.
+* _(Future)_ If an additional confirmation is required, once _R_ has successfully joined _h_, there could be additional _accept_ function added to the _Agreement Zome_.
 
 ## DNA
 ![Figure 1. Health Service Delivery DNA](../images/hsd-dna.png)
@@ -38,7 +46,7 @@ _Agreement Schema_
 
 `isActive`: simple indicator of whether the _agreement_ is currently active.
 
-`policies`: [string] -- in the PoC, a simple array of textual policies. These could evolve (after the PoC) to include a diverse array of _**pluggable governance**_ policies (e.g., cancellation policies, governance policies specifying how decisions regarding the agreement are made and disputes handled, non-disclosure agreements, upgrade policies, backward compatibility policies, etc.), some of which may be computationally enforceable policies (e.g., _smart contracts_).
+`policies`: [string] -- in the PoC, a simple array of textual policies. These could evolve (after the PoC) to include a diverse array of _**pluggable governance**_ policies (e.g., governing cancellation, dispute resolution, decision authorities, non-disclosure and confidentiality, upgrades, backward compatibility, etc.), some of which may be computationally enforceable policies (i.e.,, _smart contracts_).
 
 Holochain's _validating DHT_ ensures that Agreements_ are:
    * _**Non-repudiable**_ -- neither party can claim they didn't enter into the _agreement_. The terms were baked into the _offer_ digitally signed by the _healthcare provider_. The _consumer's_ acceptance of those terms was digitally signed by the _consumer_ (and the body of the signed _agreement_ includes the hash of the _offer_). 

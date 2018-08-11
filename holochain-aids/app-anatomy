@@ -1,4 +1,5 @@
 # Anatomy of a Holochain App
+
 This document provides a quick look at the components making up a Holochain Application from both development and deployment viewpoints.
 
 ## Development View

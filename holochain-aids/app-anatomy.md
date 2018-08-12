@@ -48,9 +48,9 @@ The folloiwng figure shows the configuration of MyPhone node having _joined_ a s
 
 ![Figure 4. Deployment View](images/Holochain%202Node%202App.png)
 
-_Figure 4. Deployment View of a Two Apps Deployed to a Two Nodes_
+_Figure 4. Deployment View of a Two Apps Deployed to Two Nodes_
 
-Notice that _hApp2_ has its own set of components: _local source chain_, _dht shard_ for hApp2, DHT server and web server. The figure also illustrates _bridging_ between apps. In this case, _hApp2_ has created a _bridge_ to _hApp1_ (which _hApp1_ has accepted). The presence of the bridge allows _hApp2_ to invoke any of the functions designated by _hApp1's_ DNA as being _bridge functions_. Note that bridges are directional. This means that _hApp1_ cannot invoked _hApp2's_ bridge functions unless it opens (and _hApp2_ accepts) a second bridge from _hApp1_ to _hApp2_. Also note that _**all bridges are local**_ to a node. 
+Notice that _hApp2_ has its own set of components: _local source chain_, _dht shard_ for hApp2, _DHT server_ and _web server_. The figure also illustrates _bridging_ between apps. In this case, _hApp2_ has created a _bridge_ to _hApp1_ (which _hApp1_ has accepted). The presence of the bridge allows _hApp2_ to invoke any of the functions designated by _hApp1's_ DNA as being _bridge functions_. Note that bridges are directional. This means that _hApp1_ cannot invoked _hApp2's_ bridge functions unless it opens (and _hApp2_ accepts) a second bridge from _hApp1_ to _hApp2_. Also note that _**all bridges are local**_ to a node. 
 
 
 

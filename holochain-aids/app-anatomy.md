@@ -10,7 +10,9 @@ The following figure depicts the components comprising the development view of a
 
 _Figure 1. Development View of a Holochain App_
 
-The components are all stored within a _dna_ folder. The structural elements of the app are stored in a _dna[.json, .yaml, .toml]_ file. As the different suffixes suggect, it can be written in JSON, YAML, or TOML. This file consists of...
+The components are all stored within a _dna_ folder. This folder contains: (1) a DNA file, (2) a UI folder, (3) One Zome folder for each Zome offered by this app.
+
+The structural elements of the app are stored in a _dna[.json, .yaml, .toml]_ file. As the different suffixes suggect, it can be written in JSON, YAML, or TOML. This file consists of...
   1. **_application meta-data_**: name, UUID, version, description, a reference to the version of holochain on which this app depends and some configuration attributes for the DHT associated with this app.     
   2. **_zero or more Properties_**: application-specific strings available as _properties_ of the application.   
   3. **_zero or more Zomes_**: You can think of a Zome as a module within the app.

@@ -10,7 +10,9 @@ The following figure depicts the components comprising the development view of a
 
 _Figure 1. Development View of a Holochain App_
 
-The components are all stored within an _application folder_. This folder contains: (1) a _DNA folder_, and (2) a UI folder.  The DNA folder contains: (a) a _dna file_, (b) a _properties_schema.json file_. (c) One Zome folder for each Zome offered by this app.
+The components are all stored within an _application folder_. This folder contains: (1) a _DNA folder_, and (2) a UI folder.  
+
+The DNA folder contains: (a) a _dna file_, (b) a _properties_schema.json file_. (c) One Zome folder for each Zome offered by this app. As noted in the diagram, a hash digest of the entire contents of the _DNA folder_ is included in the genesis entry within the DHT for the application, as well as local source chain on every node that joins this app. This makes it possible to validate that every node is running the same dna, properties and Zome code. Since the _UI folder_ is outside the _DNA folder_, the UI code is not included in the validation check.
 
 The structural elements of the app are stored in a _dna[.json, .yaml, .toml]_ file. As the different suffixes suggect, it can be written in JSON, YAML, or TOML. This file consists of...
   1. **_application meta-data_**: name, UUID, version, description, a reference to the version of holochain on which this app depends and some configuration attributes for the DHT associated with this app.     
